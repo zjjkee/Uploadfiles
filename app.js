@@ -34,7 +34,7 @@ var app = express();
 
 /* 全局环境配置 */
 
-app.set('port', process.env.PORT || 3030);
+app.set('port', process.env.PORT || 3000);
 
 //设置静态文件托管目录
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,7 +50,8 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 /* 路由配置 */
 
 //首页
-app.get('/', photos.list);
+// app.get('/', photos.list);
+app.get('/',  photos.form);
 //图片上传页
 app.get('/upload', photos.form);
 //响应图片上传
