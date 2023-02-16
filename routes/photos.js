@@ -41,10 +41,10 @@ exports.submit = function(dir){
             path:imgs[0].destination
         }, function(err){
             if(err){
-                res.send('<h1>This Mark Number/Container Number has already been uploaded!</h1><br><p>Please try another one!</p><br><a href="http://localhost:3030/upload">Continue Uploading</a>')
+                res.send('<h1>This Mark Number/Container Number has already been uploaded!</h1><br><p>Please try another one!</p><br><a href="http://localhost:3000/upload">Continue Uploading</a>')
                 return next(err);
             }else{
-                res.send('Upload Successfully!<br><a href="localhost/upload">Continue Uploading</a>');
+                res.send('Upload Successfully!<br><a href="localhost:3000/upload">Continue Uploading</a>');
             }
         });
         };
