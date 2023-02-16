@@ -9,7 +9,7 @@ var multer = require('multer');
 var storage = multer.diskStorage({
     //设置图片上传后存放的路径(默认放在系统临时文件夹中)
     destination: function(req,file,cb){
-        var newdir=`./public/photos/${req.body.cn}`;
+        var newdir=`./public/photos/${req.body.mn}`;
         if(!fs.existsSync(newdir)){
             fs.mkdirSync(newdir); 
         }
@@ -56,10 +56,12 @@ app.get('/',  photos.form);
 app.get('/upload', photos.form);
 //响应图片上传
 app.post('/upload', upload.array('file',5), photos.submit(app.get('photos')));
+
 //单张图片查看
-app.get('/photo/:id/view',photos.view(app.get('photos')));
-//图片下载
-app.get('/photo/:id/download', photos.download(app.get('photos')));
+app.get('/seach',photos.view(app.get('photos')));
+
+//根据MN查看表
+app.get('/:mn',  photos.list);
 
 //监听端口配置
 app.listen(app.get('port'), function(){

@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <title><%= title %></title>
     <link rel="stylesheet" href="./css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
-    <h1><%= title %></h1>
-    <p>Express stock photo application <a href="/upload">upload</a></p>
-    <div id="photos">
+    <div style="display: flex; align-items: center; padding-bottom: 30px;">
+        <img src="./asia.png" style="width: 60px; height: 60px; ">
+        <h6 style="text-align: center ;">Asia Logistics Inc</h6>
+    </div>
+    <div style="height: 30px;"></div>
+    <div class="numbers" style="display: flex;justify-content: space-around;">
+        <h5>Mark Number:<%= mn %></h5>
+        <h5>Container Number:<%= cn %></h5>
+    </div>
+
+    <!-- <p>Express stock photo application <a href="/upload">upload</a></p> -->
+    <div class="photos">
     <!-- 遍历数据库中保存的所有图片数据 -->
-        <% photos.forEach(function(photo){%>
-            <div class="photo">
-                <h2><%= photo.name %></h2>
-                <a href="/photo/<%= photo.id %>/view">
-                    <img src="photos/<%= photo.path %>" title="<%=photo.name %>">
-                </a>
-                <div><a href="/photo/<%= photo.id %>/download" class="download">Download</a></div>
-            </div>
-        <%}) %>
+    <% for(file of filename_list){ %>
+
+            <img class="card-img-top" src="<%=foldpath+'/'+file %>" alt="Card image cap">
+
+    <%}%>
+
     </div>
 </body>
 </html>

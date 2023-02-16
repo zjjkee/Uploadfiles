@@ -1,18 +1,18 @@
-body{
-    padding: 50px;
-    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+
 a{
     color:#00B7FF;
     text-decoration: none;
 }
-.photo{
-    display: inline-block;
-    margin: 5px;
-    padding: 10px;
-    border:1px solid #eee;
-    border-radius: 5px;
-    box-shadow: 0 1px 2px #ddd;
+div.photos{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+    justify-content: space-evenly;
+}
+img.card-img-top{
+    width: 300px;
+    height: 300px;
+    margin: 10px;
 }
 .photo h2{
     margin: 0;
