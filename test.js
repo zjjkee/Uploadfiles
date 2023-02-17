@@ -1,10 +1,4 @@
-const fs = require("fs");
-var mongoose = require('mongoose');
+sd=require("silly-datetime");
 
-
-// path1='./public/photos/123';
-// var a=fs.readdir(path1,'utf-8',function(err,data){
-//     console.log(data);
-//     return data;
-// })
-// console.log(a);
+var t1 = Date.now();
+console.log(typeof sd.format(t1))

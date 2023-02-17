@@ -8,14 +8,16 @@ var PhotoSchema = new mongoose.Schema({
     phone:Number,
     // company:String,
     mn:{
-        type:Number,
+        type:String,
         unique:true
     },
     cn:{
-        type:Number,
+        type:String,
         unique:true
     },
-    path:String
+    path:String,
+    date:String
+
 });
 
 //创建模型Model

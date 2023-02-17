@@ -1,7 +1,12 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var fs = require('fs');
 var favicon = require('serve-favicon');
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 /* multer配置*/
 var multer = require('multer');
@@ -29,9 +34,6 @@ var upload = multer({
 
 var photos = require('./routes/photos');
 
-
-var app = express();
-
 /* 全局环境配置 */
 
 app.set('port', process.env.PORT || 3000);
@@ -49,19 +51,22 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 /* 路由配置 */
 
-//首页
+//首页/图片上传页面
 // app.get('/', photos.list);
-app.get('/',  photos.form);
-//图片上传页
-app.get('/upload', photos.form);
+app.get('/',  photos.upload_form);
+app.get('/upload', photos.upload_form);
 //响应图片上传
 app.post('/upload', upload.array('file',5), photos.submit(app.get('photos')));
 
-//单张图片查看
-app.get('/seach',photos.view(app.get('photos')));
+//搜索marking number号面页
+app.get('/search', photos.search_form);
+//响应nm号页
+app.post('/search',photos.search_result(app.get(photos)));
 
-//根据MN查看表
-app.get('/:mn',  photos.list);
+
+//查看数据库所有mn号
+app.get('/list',photos.list);
+
 
 //监听端口配置
 app.listen(app.get('port'), function(){
