@@ -1,7 +1,6 @@
 
-a{
-    color:#00B7FF;
-    text-decoration: none;
+*{
+    font-size: 1.5rem;
 }
 div.photos{
     display: flex;
@@ -14,23 +13,7 @@ img.card-img-top{
     height: 300px;
     margin: 10px;
 }
-.photo h2{
-    margin: 0;
-    margin-bottom: 5px;
-    font-size: 14px;
-    font-weight: 200;
-    border-bottom: 1px solid #ccc;
-}
-.photo img{
-    height: 100px;
-}
-.photo div{
-    margin-top: 5px;
-    text-align: center;
-}
-.photo .download{
-    padding: 5px;
-}
+
 div.number{
     display: flex;
 }
@@ -40,7 +23,24 @@ span.required{
 }
 
 div.logo{
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+div.col-auto{
+    display: flex;
+    justify-content: center;
+}
+/* button{
+    font-size: 1.5rem;
+} */
+
+/* div.container{
+    height: 80vh;
+} */
+
+/* div.inner{
+  width: 100vw;
+} */
