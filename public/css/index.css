@@ -1,6 +1,9 @@
 
-*{
-    font-size: 1.5rem;
+.note{
+    font-size: 1rem;
+}
+span.input-group-text{
+    font-size: 0.8rem;
 }
 div.photos{
     display: flex;
@@ -33,14 +36,3 @@ div.col-auto{
     display: flex;
     justify-content: center;
 }
-/* button{
-    font-size: 1.5rem;
-} */
-
-/* div.container{
-    height: 80vh;
-} */
-
-/* div.inner{
-  width: 100vw;
-} */

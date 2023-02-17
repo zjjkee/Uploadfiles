@@ -22,14 +22,14 @@
         <div class="container">
 
         <div class="inner" style="margin: 50px 0px;" >
-        <p>Please enter your Info:</p>
+        <p class="note">Please enter your Info:</p>
         <div class="input-group mb-3" >
             <span class="input-group-text" id="inputGroup-sizing-default">Name<span class="required">*</span></span>
             <input class="form-control name" name="name" type="text" placeholder="Please type Your Name"  required>
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Phone<span class="required">*</span></span>
-            <span class="input-group-text" id="inputGroup-sizing-default">(+1)</span>
+            <span class="input-group-text" id="inputGroup-sizing-default">Phone(+1)<span class="required">*</span></span>
+            <!-- <span class="input-group-text" id="inputGroup-sizing-default">(+1)</span> -->
             <input class="form-control phone" name="phone" type="text" placeholder="Please type your phone number" required pattern="\d{10}" maxlength="10"> 
         </div>
         <div class="input-group mb-3">
@@ -38,24 +38,24 @@
         </div></div>
         
         <div class="inner" style="margin: 50px 0px;">
-        <p>Please enter the numbers:</p>
+        <p class="note">Please enter the <span style="color: red;">Mark Number</span> and <span style="color: red;">Container Number</span>:</p>
         <div class="input-group mb-3">        
-            <span class="input-group-text" id="inputGroup-sizing-default">Mark Number<span class="required">*</span></span>
+            <span class="input-group-text" id="inputGroup-sizing-default">MN<span class="required">*</span></span>
             <input class="form-control mn" name="mn" type="text" placeholder="Mark Number" required pattern="\w\w\d{3}" maxlength="5">
         </div>
         <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">Container Number<span class="required">*</span></span>
+        <span class="input-group-text" id="inputGroup-sizing-default">CN<span class="required">*</span></span>
         <input class="form-control cn" name="cn" type="text" placeholder="Container Number" required>
         </div>
         </div>
 
         <div class="mb-3 inner" style="margin: 50px 0px;">
-            <label for="formFileMultiple" class="form-label">Please Select at least 3 photos<span class="required">*</span>:</label>
+            <label for="formFileMultiple" class="form-label note">Please Select at least 3 photos<span class="required">*</span>:</label>
             <input class="form-control files" type="file" id="formFileMultiple" name="file" multiple required  accept=".jpg, .jpeg, .png" onchange="fileCountCheck(this,3,5)">
         </div>
 
         <div class="col-auto">
-            <button type="submit" class="submit btn btn-primary mb-3" value="Upload">Submit</button>
+            <button type="submit" class="submit btn btn-primary mb-3" value="Upload" >Submit</button>
         </div>
     </div>
     </form>
@@ -71,7 +71,13 @@ function fileCountCheck(filesObj, minFileNum, maxFileNum) {
              if (fileCount < minFileNum || fileCount > maxFileNum) {
  
                  // 不符合数量的处理
-                 window.alert('Please Select at Least 3 images and No More Than 5!!!');
+                window.alert('Please Select at Least 3 images and No More Than 5!!!');
+                //  filesObj.files={};
+                console.log(filesObj ,typeof filesObj.files,filesObj.files,fileCount,FileList);
+                var _file = document.getElementById("formFileMultiple");
+                console.log(_file.outerHTML)
+                _file.outerHTML = _file.outerHTML;
+            
                  return false;
              } else {
                  return true;
