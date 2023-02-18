@@ -64,8 +64,10 @@ app.get('/search', photos.search_form);
 app.post('/search',photos.search_result(app.get(photos)));
 
 
-//查看数据库所有mn号
+//list页面，列出所有mn
 app.get('/list',photos.list);
+//响应list页面，print
+app.post('/list',photos.print)
 
 
 //监听端口配置

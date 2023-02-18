@@ -1,7 +1,7 @@
 var Photo = require('../models/Photo');
 var path = require('path');
 var fs = require("fs");
-sd=require("silly-datetime");
+var sd=require("silly-datetime");
 
 // GET list页
 exports.list = function(req,res){
@@ -14,10 +14,58 @@ exports.list = function(req,res){
     for(dbitem of dbitems){
         l.push(dbitem._doc);
     }
-    console.log(dbitems)
+    // console.log(dbitems)
     res.render('list',{
         doc_list:l,
     })
+    });
+};
+//POST 响应list页面，生成print页面
+exports.print = function(req,res){
+    //查找数据库中的所有图片数据，并渲染首页index.ejs
+    var mnlist= req.body.mn;//[ 'as123', 'fw214', 'as214', 'as241' ]
+    var doc_list=[]
+    console.log("this is mnlist:",mnlist);
+    
+    Photo.find({mn:{$in:mnlist}},function(err,dbitems){
+        if(err){
+            return next(err);
+    }      
+    // console.log("this is dbitem._doc:",dbitems);
+    for(dbitem of dbitems){
+        let l=dbitem._doc;
+        doc_list.push(l);
+    }
+    console.log(doc_list);   //[{mn:as123,cn:asdaf,..},{},{}......] !!!!!!!!!!
+    var path_list=[];
+    for(dbitem of dbitems){
+        let l=dbitem._doc.path;
+        path_list.push(l);
+    }
+    console.log('THis is path_list:',path_list);//['./public/photos/as123',...]
+    var filename_list=[];
+ 
+    // path_list.forEach(folder) => {
+    //     fs.readdir(`${unzippedPath}/${folder}/`, (err, files) => {
+    //         // console.log(files);
+    //         filename_list.push(files);
+    //         console.log(filename_list);
+    // });
+
+    unzippedPath='./public/photos/';
+    for(let i of path_list){
+        var filename = fs.readdirSync(i);
+        filename_list.push(filename);
+   
+    }
+    console.log(filename_list);
+
+    res.render('list_print',{   
+        doc_list:doc_list,//[{mn:as123,cn:asdaf,..},{},{}......]
+        filename_list:filename_list,     // [['file1','file2',..],[],[]....]
+        path_list:path_list
+    });   
+
     });
 
 };
@@ -54,10 +102,10 @@ exports.submit = function(dir){
             date:t
         }, function(err){
             if(err){
-                res.send('<h1>This Mark Number/Container Number has already been uploaded!</h1><br><p>Please try another one!</p><br><a href="http://localhost:3000">Continue Uploading</a>')
+                res.send('<h1>This Mark Number/Container Number has already been uploaded!</h1><br><p>Please try another one!</p><br><a href="/">Continue Uploading</a>')
                 return next(err);
             }else{
-                res.send('Upload Successfully!<br><a href="http://localhost:3000">Continue Uploading</a>');
+                res.send('Upload Successfully!<br><a href="/">Continue Uploading</a>');
             }
         });
         };
@@ -72,17 +120,16 @@ exports.search_form = function(req,res){
     });
 };
 
-
 //POST   响应搜索mn
 exports.search_result = function(dir){
     return function(req,res){
-        req_mn=req.body.mn;
-        Photo.find({mn:req_mn},function(err,dbitem){
+        req_mn=req.body.mn;//单个值：ab123
+        Photo.findOne({mn:req_mn},function(err,dbitem){
             if(err){
                 return next(err);
         }      
-            if(dbitem[0]!=undefined){
-                fold_path=dbitem[0]._doc.path;
+            if(dbitem!=undefined){
+                fold_path=dbitem._doc.path;//./public/photos/123
                 fs.readdir(fold_path,'utf-8',function(err,data){
                     if(err){
                         return next(err)} 
@@ -90,12 +137,12 @@ exports.search_result = function(dir){
                     // console.log('this is data[0]',fold_path);
                     // console.log(dbitem[0]._doc)
                     reg = new RegExp("/public");
-                    fold_path=fold_path.replace(reg,"");
-                    res.render('index',{
+                    fold_path=fold_path.replace(reg,"");//./photos/123
+                    res.render('search_result',{
                         title:`Mark Number:${req.params.mn}`,
-                        cn:dbitem[0]._doc.cn,
-                        mn:dbitem[0]._doc.mn,
-                        foldpath: fold_path,   //./public/photos/123
+                        cn:dbitem._doc.cn,
+                        mn:dbitem._doc.mn,
+                        foldpath: fold_path,   //./photos/123
                         filename_list:data    //[ '微信图片_20220707122716.jpg', '微信图片_20220708190925.jpg' ]
                     });   
     

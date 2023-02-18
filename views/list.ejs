@@ -10,6 +10,10 @@
     <title>List</title>
 </head>
 <body>
+    <form action="/list" method="POST">
+    <div class="col-auto">
+        <button type="submit" class="submit btn btn-primary mb-3" value="Upload" >Print</button>
+    </div>
     <table class="table">
         <thead>
           <tr>
@@ -19,13 +23,14 @@
             <th scope="col">Uploader</th>
             <th scope="col">Phone</th>
             <th scope="col">UploadDate</th>
+            
           </tr>
         </thead>
         <tbody>
             <%var i=1%>
               <%for(doc of doc_list){%>
                 <tr>
-                    <th scope="row"><%=i%></th>
+                    <th scope="row"> <input type="checkbox" value="<%=doc.mn%>" name="mn"><%=i%></th>
                     <td><%=doc.mn%> </td>
                     <td><%=doc.cn%></td>
                     <td><%=doc.name%></td>
@@ -36,5 +41,6 @@
               <%}%>
             </tbody>
       </table>
+    </form>
 </body>
 </html>
