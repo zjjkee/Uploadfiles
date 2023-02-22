@@ -56,7 +56,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.get('/',  photos.upload_form);
 app.get('/upload', photos.upload_form);
 //响应图片上传
-app.post('/upload', upload.array('file',5), photos.submit(app.get('photos')));
+app.post('/upload', upload.array('file',10), photos.submit(app.get('photos')));
 
 //搜索marking number号面页
 app.get('/search', photos.search_form);

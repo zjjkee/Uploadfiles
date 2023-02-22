@@ -16,7 +16,11 @@ var PhotoSchema = new mongoose.Schema({
         unique:true
     },
     path:String,
-    date:String
+    date: {
+        type: String,
+        default: Date.now
+        }
+    
 
 });
 
