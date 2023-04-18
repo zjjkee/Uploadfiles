@@ -10,7 +10,7 @@
     "photo",
     "storage"
   ],
-  "author": "Tom_chao",
+  "author": "Jingke Zou",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.1",
